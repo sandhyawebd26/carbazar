@@ -1,0 +1,9 @@
+.about{
+    justify-content: center;
+    display: grid;
+    margin: 25px;
+}
+
+.about h2{
+    text-align: center;
+}
