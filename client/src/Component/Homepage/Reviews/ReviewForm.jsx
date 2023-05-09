@@ -2,7 +2,7 @@ import React from "react";
 import "./ReviewForm.css";
 import axios from 'axios';
 
-function ReviewForm(){
+function ReviewForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const reviewData = {
@@ -18,18 +18,28 @@ function ReviewForm(){
     }
   };
 
-    return (
+  return (
     <>
       <div className="reviewBox">
         <h2 className="heading">User Review</h2>
         <form className="reviewForm">
+          <input
+            type="text"
+            name="title" // Add name attribute
+            placeholder="Title"
+          />
           <textarea
-            name="textarea"
+            name="content" // Add name attribute
             rows="10"
             cols="50"
             placeholder="Write something here!"
           ></textarea>
-          <button className="subButton btn btn-success" onClick={handleSubmit}>Submit</button>
+          <input
+            type="number"
+            name="rating" // Add name attribute
+            placeholder="Rating"
+          />
+          <button className="subButton btn btn-success" onClick={(e) => handleSubmit(e)}>Submit</button>
         </form>
       </div>
     </>
@@ -37,6 +47,3 @@ function ReviewForm(){
 }
 
 export default ReviewForm;
-
-
-
