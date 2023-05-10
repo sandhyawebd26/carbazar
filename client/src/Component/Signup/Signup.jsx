@@ -13,6 +13,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function SignInSide() {
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -33,14 +35,17 @@ export default function SignInSide() {
     e.preventDefault();
     console.log(data.name, data.email, data.contact, data.password);
     axios
-      .post("http://localhost:5000/api/register", {
-        name: data.name,
+      .post("http://localhost:5000/api/auth/register", {
+        fullname: data.name,
         email: data.email,
         contact: data.contact,
         password: data.password,
       })
       .then((res) => {
+        
         console.log(res.data);
+        navigate("/");
+
         alert("success")
       })
       .catch((err) => {

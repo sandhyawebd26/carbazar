@@ -1,3 +1,4 @@
+import React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,17 +10,39 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
 // import { Link } from "react-router-dom";
 
 export default function SignInSide() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/login", {
+        email,
+        password,
+      });
+      console.log(response.data);
+      // Handle successful login response
+
+      // Navigate to home page
+      navigate("/");
+
+    } catch (error) {
+      console.error(error);
+      // Handle error response
+    }
   };
+
+
 
   return (
     <Container component="main" maxWidth="lg">

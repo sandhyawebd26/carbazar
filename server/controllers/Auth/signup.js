@@ -25,6 +25,7 @@ const postRegister = async (req, res) => {
 
     res.status(201).json({ success: true, user, token });
   } catch (err) {
+    console.log("ERROR=>",err);
     res.status(500).send(`${err}, user not created`);
   }
 };
