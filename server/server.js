@@ -10,7 +10,7 @@ const server = http.createServer(app);
 
 dotenv.config({ path: "./config.env" });
 
-mongoose.connect(process.env.DATABASE, {
+mongoose.connect(process.env.DB_CONNECTION, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
