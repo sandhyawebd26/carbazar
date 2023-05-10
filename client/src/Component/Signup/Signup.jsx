@@ -17,35 +17,36 @@ export default function SignInSide() {
     name: "",
     email: "",
     contact: "",
-    password: ""
+    password: "",
   });
 
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
+  let name, value;
+  const handleInputs = (e) => {
+    console.log(e);
+    name = e.target.name;
+    value = e.target.value;
 
-  const handleChange = ({ currentTarget: input }) => {
-    setData((prevData) => ({
-      ...prevData,
-      [input.name]: input.value
-    }));
+    setData({ ...data, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const url = "http://localhost:5000/api/users";
-      const { data: res } = await axios.post(url, data);
-      navigate("/login");
-      console.log(res.message);
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
-    }
+    console.log(data.name, data.email, data.contact, data.password);
+    axios
+      .post("http://localhost:5000/api/register", {
+        name: data.name,
+        email: data.email,
+        contact: data.contact,
+        password: data.password,
+      })
+      .then((res) => {
+        console.log(res.data);
+        alert("success")
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('service error');
+      });
   };
 
   return (
@@ -67,7 +68,7 @@ export default function SignInSide() {
                   ? t.palette.grey[50]
                   : t.palette.grey[900],
               backgroundSize: "cover",
-              backgroundPosition: "center"
+              backgroundPosition: "center",
             }}
           />
           <Grid
@@ -85,7 +86,7 @@ export default function SignInSide() {
                 mx: 4,
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <Typography component="h1" variant="h5">
@@ -97,7 +98,6 @@ export default function SignInSide() {
                 onSubmit={handleSubmit}
                 sx={{ mt: 1 }}
               >
-
                 <TextField
                   margin="normal"
                   required
@@ -108,7 +108,7 @@ export default function SignInSide() {
                   type="text"
                   id="name"
                   autoComplete="current-name"
-                  onChange={handleChange}
+                  onChange={handleInputs}
                 />
                 <TextField
                   margin="normal"
@@ -121,9 +121,8 @@ export default function SignInSide() {
                   id="email"
                   autoComplete="email"
                   autoFocus
-                  onChange={handleChange}
+                  onChange={handleInputs}
                 />
-
 
                 <TextField
                   margin="normal"
@@ -135,7 +134,7 @@ export default function SignInSide() {
                   value={data.contact}
                   autoComplete="number"
                   autoFocus
-                  onChange={(e) => setData(e.target.value)}
+                  onChange={handleInputs}
                 />
                 <TextField
                   margin="normal"
@@ -147,7 +146,7 @@ export default function SignInSide() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  onChange={(e) => setData(e.target.value)}
+                  onChange={handleInputs}
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
