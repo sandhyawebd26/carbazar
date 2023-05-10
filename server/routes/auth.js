@@ -27,5 +27,7 @@ router.post(
 
 router.post("/login", validator.body(loginSchema), authController.postLogin);
 
+router.post("/review")
+
 
 module.exports = router;
