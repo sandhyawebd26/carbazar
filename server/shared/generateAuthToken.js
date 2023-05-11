@@ -10,7 +10,7 @@ function generateAuthToken(user) {
     },
     SECRETKEY,
     {
-      expiresIn: "2d",
+      expiresIn: "7d",
     }
   );
   return token;

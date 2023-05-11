@@ -9,17 +9,17 @@ function ReviewForm() {
     rating: 0,
   });
 
-  
   const handleSubmit = async (e) => {
   e.preventDefault();
-  const formData = new FormData(e.target);
+  const data = new FormData(e.target);
+  // formData.append("title",formData1?. title)
   const reviewData = {
     title: formData.get("title"),
     content: formData.get("content"),
     rating: formData.get("rating"),
   };
     try {
-      const response = await axios.post("http://localhost:5000/api/api/reviews", title,content,rating);
+      const response = await axios.post("http://localhost:5000/api/api/reviews", reviewData);
       console.log(response);
 
       const formData = new FormData(e.currentTarget);
