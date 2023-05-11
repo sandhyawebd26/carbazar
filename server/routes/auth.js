@@ -19,6 +19,17 @@ const loginSchema = Joi.object({
   password: Joi.string().min(3).max(15).required(),
 });
 
+
+// const ProductSchema= Joi.object({
+//   title:String,
+//   description:String,
+//   reviews:String,
+//   price:String,
+
+
+// })
+
+
 router.post(
   "/register",
   validator.body(registerSchema),
@@ -27,7 +38,10 @@ router.post(
 
 router.post("/login", validator.body(loginSchema), authController.postLogin);
 
+
+
 router.post("/review")
+
 
 
 module.exports = router;

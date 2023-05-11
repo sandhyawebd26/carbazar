@@ -10,7 +10,7 @@ const Dburl ="mongodb+srv://sandhyaginare:EfL4zox2hmL1XWmz@cluster0.bl27dmh.mong
 const server = http.createServer(app);
 
 dotenv.config({ path: "./config.env" });
-console.log("Database connected successfully", process.env.DB_CONNECTION);
+console.log("Database connected successfully", process.env.DATABASE);
 
 mongoose.connect(Dburl, {
   useNewUrlParser: true,
